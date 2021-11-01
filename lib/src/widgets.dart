@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:custom_check_box/custom_check_box.dart';
 
-toDoRow(item, index) {
+Widget toDoRow(item, index) {
   const shadowOffsetY = 4.0;
   return Container(
     decoration: BoxDecoration(
@@ -11,8 +11,6 @@ toDoRow(item, index) {
           Colors.black.withOpacity(0.4),
           Colors.indigo.withOpacity(0.1),
           Colors.transparent,
-          // Colors.transparent,
-          // Colors.transparent,
         ],
         stops: const [0, 0.01, 0.5],
         begin: Alignment.topCenter,
@@ -26,16 +24,7 @@ toDoRow(item, index) {
             width: 40.0,
             height: 40.0,
             decoration: const BoxDecoration(
-              // color: const Color(0xff7c94b6),
-              // // image: const DecorationImage(
-              // //   image: AssetImage('assets/bg_header.png'),  // temporarily not used
-              // //   fit: BoxFit.cover,
-              // // ),
               borderRadius: BorderRadius.all(Radius.circular(50)),
-              // border: Border.all(
-              //   color: Colors.white,
-              //   width: 4.0,
-              // ),
               boxShadow: [
                 BoxShadow(
                   spreadRadius: -11,
@@ -105,4 +94,64 @@ toDoRow(item, index) {
       ],
     ),
   );
+}
+
+//
+//
+//
+class BottomSheetStatelessWidget extends StatelessWidget {
+  const BottomSheetStatelessWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    // Button add new
+    return Container(
+      decoration: const BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black26,
+              offset: Offset(0.0, -4), //(x,y)
+              blurRadius: 6.0,
+            ),
+          ],
+          color: Colors.deepOrange,
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(15), topRight: Radius.circular(15))),
+      height: 50,
+      alignment: Alignment.center,
+      // color: Colors.deepOrange,
+      child: TextButton.icon(
+        onPressed: () => showPress(context),
+        icon: const Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
+        label: const Text(
+          'Add new',
+          textScaleFactor: 1.4,
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
+    );
+  }
+
+  void showPress(BuildContext context) {
+    showModalBottomSheet(
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(15), topRight: Radius.circular(15)),
+        ),
+        backgroundColor: Colors.white,
+        context: context,
+        builder: (context) {
+          return Container(
+              // decoration: const BoxDecoration(
+              //   borderRadius: BorderRadius.only(
+              //       topLeft: Radius.circular(10),
+              //       topRight: Radius.circular(10)),
+              // ),
+              // height: 300,
+              child: const Center(child: Text('add new item')));
+        });
+  }
 }

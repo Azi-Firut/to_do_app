@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'ToDo List',
       theme: ThemeData(
-        primarySwatch: Colors.indigo,
+        primarySwatch: Colors.deepOrange,
       ),
       home: const HomePage(title: 'ToDo List'),
     );
@@ -31,7 +31,6 @@ class HomePage extends StatefulWidget {
 
 class HomePageState extends State<HomePage> {
   int _counter = 0;
-
   void _incrementCounter() {
     setState(() {
       _counter++;
@@ -41,7 +40,13 @@ class HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(15),
+              bottomRight: Radius.circular(15)),
+        ),
         centerTitle: true,
         title: Text(widget.title),
       ),
@@ -53,28 +58,8 @@ class HomePageState extends State<HomePage> {
               return toDoRow(item, index);
             }),
       ),
-      floatingActionButton: SizedBox(
-        width: 380,
-        child: FloatingActionButton.extended(
-          label: const Text(
-            'Add Note',
-            textScaleFactor: 1.3,
-          ),
-          isExtended: true,
-          // onPressed: () {},
-          onPressed: _incrementCounter,
-          tooltip: 'Increment',
-          icon: const Icon(Icons.add),
-          elevation: 3,
-        ),
-        // showModalBottomSheet(
-        //     context: context,
-        //     backgroundColor: Colors.lightBlue,
-        //     elevation: 10,
-        //     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-        //     ...
-        // ),
-      ),
+      floatingActionButtonLocation: (FloatingActionButtonLocation.centerDocked),
+      floatingActionButton: const BottomSheetStatelessWidget(),
     );
   }
 }
