@@ -35,6 +35,7 @@ class HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        toolbarHeight: 40,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
               bottomLeft: Radius.circular(15),
@@ -220,7 +221,6 @@ class HomePageState extends State<HomePage> {
               topLeft: Radius.circular(15), topRight: Radius.circular(15))),
       height: 50,
       alignment: Alignment.center,
-      // color: Colors.deepOrange,
       child: TextButton.icon(
         onPressed: () => showPress(context),
         icon: const Icon(
@@ -246,14 +246,13 @@ class HomePageState extends State<HomePage> {
         backgroundColor: Colors.white,
         context: context,
         builder: (context) {
-          // var labelAdd;
           return Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                textUnderField(),
-                addTextField(''),
-                _addItemButton(() {}),
+                Container(child: textUnderField()),
+                Container(height: 200, child: addTextField('')),
+                _addItemButton(),
               ]);
         });
   }
@@ -270,37 +269,32 @@ class HomePageState extends State<HomePage> {
     return Items(label, da);
   }
 
-// void addLabelToList() {
-//   var label = _inputController.text;
-//   Items.listItems.insert(0, test(date, label));
-//   _inputController.clear();
-// }
-
   void addLabelToList() {
     var label = _inputController.text;
-    Items.listItems.insert(0, test(dateNow, label));
-    _inputController.clear();
+    if (label.isNotEmpty) {
+      Items.listItems.insert(0, test(dateNow, label));
+      _inputController.clear();
+    }
   }
 
-  Widget _input(String hint, TextEditingController controller) {
-    return Container(
-      child: TextField(
-          controller: controller,
-          textAlign: TextAlign.center,
-          decoration: InputDecoration(
-            focusedBorder:
-                const OutlineInputBorder(borderSide: BorderSide(width: 3)),
-            hintText: hint,
-            filled: true,
-            border: OutlineInputBorder(
-                borderSide: BorderSide.none,
-                borderRadius: BorderRadius.circular(30)),
-            helperText: 'Write slowly',
-            floatingLabelBehavior: FloatingLabelBehavior.auto,
-          ),
-          textInputAction: TextInputAction.next,
-          restorationId: 'add new text'),
-    );
+  Widget _input(TextEditingController controller) {
+    return TextField(
+        controller: controller,
+        textAlign: TextAlign.center,
+        decoration: InputDecoration(
+          focusedBorder: OutlineInputBorder(
+              borderSide: const BorderSide(width: 3),
+              borderRadius: BorderRadius.circular(30)),
+          hintText: 'type here',
+          filled: true,
+          border: OutlineInputBorder(
+              borderSide: BorderSide.none,
+              borderRadius: BorderRadius.circular(30)),
+          //helperText: 'Write slowly',
+          floatingLabelBehavior: FloatingLabelBehavior.auto,
+        ),
+        textInputAction: TextInputAction.next,
+        restorationId: 'add new text');
   }
 
 // text - add new item
@@ -322,12 +316,12 @@ class HomePageState extends State<HomePage> {
   Widget addTextField(labelAdd) {
     return Padding(
       padding: const EdgeInsets.all(10.0),
-      child: _input('hint', _inputController),
+      child: _input(_inputController),
     );
   }
 
 // button add item to list
-  Widget _addItemButton(void Function() foo) {
+  Widget _addItemButton() {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
