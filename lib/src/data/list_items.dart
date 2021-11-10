@@ -1,60 +1,49 @@
 class Items {
+  bool isChecked;
   String label;
   String date;
 
   Items(
     this.label,
     this.date,
+    this.isChecked,
   );
 
   static List<Items> listItems = [
     Items(
       'Math',
-      '911',
+      '910',
+      false,
     ),
     Items(
       'Architecture',
-      '912',
+      '910',
+      false,
     ),
     Items(
       'Biology',
-      '913',
+      '910',
+      false,
     ),
     Items(
       'Flutter',
-      '914',
+      '910',
+      false,
     ),
     Items(
       'Artificial Intelligences',
-      '915',
+      '910',
+      false,
     ),
     Items(
       'Omg',
-      '916',
+      '910',
+      false,
     ),
     Items(
       'Math',
-      '911',
-    ),
-    Items(
-      'Architecture',
-      '912',
-    ),
-    Items(
-      'Biology',
-      '913',
-    ),
-    Items(
-      'Flutter',
-      '914',
-    ),
-    Items(
-      'Artificial Intelligences',
-      '915',
-    ),
-    Items(
-      'Omg',
-      '916',
+      '910',
+      false,
     )
   ];
 }
