@@ -2,6 +2,7 @@ import 'package:custom_check_box/custom_check_box.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:to_do/src/function/functions_main_screen.dart';
+import 'package:to_do/src/pages/item_page.dart';
 import 'package:to_do/src/widgets/widgets_main_screen.dart';
 import 'src/data/list_items.dart';
 
@@ -84,20 +85,33 @@ class HomePageState extends State<HomePage> {
                     const CheckBoxWidget(),
                     const ImageSmallWidget(),
                     Expanded(
-                      child: Stack(children: [
-                        ShowLabelWidget(toDoItem.label),
-                        Positioned(
-                          child: ShowItemDate(toDoItem.date),
-                          bottom: 4,
-                          right: 4,
-                        ),
-                        Positioned(
-                          child: ShowNumberOfItem(index),
-                          top: 4,
-                          right: 4,
-                        ),
-                      ]),
-                    ),
+                      child: GestureDetector(
+                        ///////
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ItemPage(
+                                        title: widget.title,
+                                        label: toDoItem.label,
+                                      ) ///////
+                                  ));
+                        },
+                        child: Stack(children: [
+                          ShowLabelWidget(toDoItem.label),
+                          Positioned(
+                            child: ShowItemDate(toDoItem.date),
+                            bottom: 4,
+                            right: 4,
+                          ),
+                          Positioned(
+                            child: ShowNumberOfItem(index),
+                            top: 4,
+                            right: 4,
+                          ),
+                        ]),
+                      ),
+                    )
                   ],
                 ),
               );
