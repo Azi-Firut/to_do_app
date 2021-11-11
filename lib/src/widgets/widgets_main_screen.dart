@@ -6,9 +6,11 @@ import 'package:to_do/src/function/functions_main_screen.dart';
 
 // Check Box widget
 class CheckBoxWidget extends StatefulWidget {
-  const CheckBoxWidget({
+  CheckBoxWidget(
+    this.isChecked, {
     Key? key,
   }) : super(key: key);
+  var isChecked;
   @override
   State<StatefulWidget> createState() => _CheckBoxWidgetState();
 }
@@ -32,20 +34,23 @@ class _CheckBoxWidgetState extends State<CheckBoxWidget> {
         ],
       ),
       child: CustomCheckBox(
-        value: false,
+        value: widget.isChecked,
         uncheckedIcon: const IconData(10),
         uncheckedFillColor: Colors.grey.shade300,
         shouldShowBorder: true,
         borderColor: Colors.white,
         checkedFillColor: Colors.red,
         borderRadius: 20,
-        borderWidth: 2,
-        checkBoxSize: 14,
+        borderWidth: 3,
+        checkBoxSize: 18,
         onChanged: (val) {
-          //do your stuff here
-          // setState(() {
-          //   shouldCheck = val;
-          // });
+          setState(() {
+            if (widget.isChecked == true) {
+              widget.isChecked = false;
+            } else {
+              widget.isChecked = true;
+            }
+          });
         },
       ),
     );
@@ -59,9 +64,10 @@ class ShowLabelWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 70.0,
+      height: 76.0,
       child: Padding(
-        padding: const EdgeInsets.only(left: 8.0),
+        padding:
+            const EdgeInsets.only(left: 8.0, top: 8.0, bottom: 8.0, right: 8.0),
         //GestureDetector!!
         child: Text(
           // GestureDetector
@@ -84,11 +90,13 @@ class ShowLabelWidget extends StatelessWidget {
   }
 }
 
-// Avatar
+// Small Avatar
 class ImageSmallWidget extends StatelessWidget {
-  const ImageSmallWidget({
+  ImageSmallWidget(
+    this.imgUrl, {
     Key? key,
   }) : super(key: key);
+  var imgUrl;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -97,10 +105,10 @@ class ImageSmallWidget extends StatelessWidget {
       height: 60.0,
       decoration: BoxDecoration(
         color: const Color(0xff7c94b6),
-        // image: const DecorationImage(
-        //   image: AssetImage('assets/bg_header.png'),  // temporarily not used
-        //   fit: BoxFit.cover,
-        // ),
+        image: DecorationImage(
+          image: NetworkImage(imgUrl), // temporarily not used
+          fit: BoxFit.cover,
+        ),
         borderRadius: const BorderRadius.all(Radius.circular(50.0)),
         border: Border.all(
           color: Colors.white,

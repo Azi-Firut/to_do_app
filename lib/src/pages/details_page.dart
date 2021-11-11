@@ -28,10 +28,12 @@ class MyApp extends StatelessWidget {
 }
 
 class ItemPage extends StatefulWidget {
-  const ItemPage({Key? key, required this.title, required this.label})
+  const ItemPage(
+      {Key? key, required this.title, required this.label, this.imgUrl})
       : super(key: key);
   final String title;
   final String label;
+  final imgUrl;
 
   @override
   State<ItemPage> createState() => ItemPageState();
@@ -66,7 +68,6 @@ class ItemPageState extends State<ItemPage> {
         ),
         body: Center(
           child: Column(
-            // mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
@@ -75,10 +76,10 @@ class ItemPageState extends State<ItemPage> {
                 height: 260.0,
                 decoration: BoxDecoration(
                   color: const Color(0xff7c94b6),
-                  // image: const DecorationImage(
-                  //   image: AssetImage('assets/bg_header.png'),  // temporarily not used
-                  //   fit: BoxFit.cover,
-                  // ),
+                  image: DecorationImage(
+                    image: NetworkImage(widget.imgUrl), // temporarily not used
+                    fit: BoxFit.cover,
+                  ),
                   borderRadius: const BorderRadius.all(Radius.circular(200.0)),
                   border: Border.all(
                     color: Colors.white,
@@ -93,7 +94,21 @@ class ItemPageState extends State<ItemPage> {
                   ],
                 ),
               ),
-              Text(widget.label)
+              Text(
+                widget.label,
+                style: const TextStyle(
+                  color: Colors.black54,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 20,
+                  shadows: [
+                    Shadow(
+                      blurRadius: 10.0,
+                      color: Colors.black38,
+                      offset: Offset(0, 4.0),
+                    ),
+                  ],
+                ),
+              )
             ],
           ),
         ));

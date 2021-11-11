@@ -2,7 +2,7 @@ import 'package:custom_check_box/custom_check_box.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:to_do/src/function/functions_main_screen.dart';
-import 'package:to_do/src/pages/item_page.dart';
+import 'package:to_do/src/pages/details_page.dart';
 import 'package:to_do/src/widgets/widgets_main_screen.dart';
 import 'src/data/list_items.dart';
 
@@ -37,11 +37,13 @@ class HomePage extends StatefulWidget {
 class HomePageState extends State<HomePage> {
   void addNewLabelToList() {
     setState(() {
-      //var isChecked;
+      var isChecked;
+      var imgUrl =
+          'https://i.c97.org/p/articles/2017/ai-240143-aux-head-20161207_zdun_360.jpg';
       var label = inputController.text;
       var dateNow = DateTime.now().toString();
       if (label.isNotEmpty) {
-        Items.listItems.insert(0, createNewItem(dateNow, label));
+        Items.listItems.insert(0, createNewItem(dateNow, label, imgUrl));
         inputController.clear();
       }
     });
@@ -82,9 +84,10 @@ class HomePageState extends State<HomePage> {
                 ),
                 child: Row(
                   children: [
-                    const CheckBoxWidget(),
-                    const ImageSmallWidget(),
+                    CheckBoxWidget(toDoItem.isChecked),
+                    ImageSmallWidget(toDoItem.imgUrl),
                     Expanded(
+                      flex: 1,
                       child: GestureDetector(
                         ///////
                         onTap: () {
@@ -94,6 +97,7 @@ class HomePageState extends State<HomePage> {
                                   builder: (context) => ItemPage(
                                         title: widget.title,
                                         label: toDoItem.label,
+                                        imgUrl: toDoItem.imgUrl,
                                       ) ///////
                                   ));
                         },
@@ -199,4 +203,7 @@ class HomePageState extends State<HomePage> {
       ),
     );
   }
+
+  // Sort fun
+  void sortByCheck() {}
 }
