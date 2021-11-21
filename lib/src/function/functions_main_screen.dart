@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -17,6 +20,7 @@ void delMessage(label) {
 }
 
 void delLabelItem(context, targetIndex) {
+  log(targetIndex.toString());
   FirebaseFirestore.instance
       .collection('todos')
       .doc(targetIndex.id)
@@ -25,3 +29,18 @@ void delLabelItem(context, targetIndex) {
     print("Delete successful!");
   });
 }
+
+// void changeIsChecked(targetIndex) {
+//   if ('isChecked' == false) {
+//     log(targetIndex.toString());
+//     FirebaseFirestore.instance.collection('todos').doc(targetIndex).update({
+//       'isChecked': false,
+//     });
+//
+//   } else if ('isChecked' == true) {
+//     FirebaseFirestore.instance.collection('todos').doc(targetIndex).update({
+//       'isChecked': true,
+//     });
+//
+//   }
+// }

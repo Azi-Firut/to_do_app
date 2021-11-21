@@ -1,5 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:to_do/src/function/functions_main_screen.dart';
@@ -54,11 +52,6 @@ class ItemPageState extends State<ItemPage> {
         backgroundColor: Colors.white,
         appBar: AppBar(
           toolbarHeight: 40,
-          // shape: const RoundedRectangleBorder(
-          //   borderRadius: BorderRadius.only(
-          //       bottomLeft: Radius.circular(15),
-          //       bottomRight: Radius.circular(15)),
-          // ),
           centerTitle: true,
           title: Text('Details '),
           actions: [

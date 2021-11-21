@@ -1,26 +1,29 @@
+import 'dart:developer';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:custom_check_box/custom_check_box.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:custom_check_box/custom_check_box.dart';
-import 'package:to_do/src/data/list_items.dart';
 import 'package:to_do/src/function/functions_main_screen.dart';
 
 // Check Box widget
 class CheckBoxWidget extends StatefulWidget {
   CheckBoxWidget(
+    this.targetIndex,
     this.isChecked,
     this.imgUrl, {
     Key? key,
   }) : super(key: key);
-  bool isChecked;
-
+  dynamic isChecked;
   String imgUrl;
+  dynamic targetIndex;
 
   @override
   State<StatefulWidget> createState() => _CheckBoxWidgetState();
 }
 
 class _CheckBoxWidgetState extends State<CheckBoxWidget> {
+  // get targetIndex => targetIndex;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -52,14 +55,40 @@ class _CheckBoxWidgetState extends State<CheckBoxWidget> {
           setState(() {
             if (widget.isChecked == true) {
               widget.isChecked = false;
+              FirebaseFirestore.instance
+                  .collection('todos')
+                  .doc(widget.targetIndex.id)
+                  .update({
+                'isChecked': false,
+              });
+              //changeIsChecked(widget.targetIndex);
             } else {
               widget.isChecked = true;
+              FirebaseFirestore.instance
+                  .collection('todos')
+                  .doc(widget.targetIndex.id)
+                  .update({
+                'isChecked': true,
+              });
+              //changeIsChecked(widget.targetIndex);
             }
           });
         },
       ),
     );
   }
+
+  // void changeIsChecked() {
+  //   if ('isChecked' == false) {
+  //     FirebaseFirestore.instance.collection('todos').add({
+  //       'isChecked': true,
+  //     });
+  //   } else {
+  //     FirebaseFirestore.instance.collection('todos').add({
+  //       'isChecked': false,
+  //     });
+  //   }
+  // }
 }
 
 // Show Label widget
@@ -164,7 +193,6 @@ class ShowItemDate extends StatelessWidget {
   }) : super(key: key);
   var date;
 
-// showItemDate(Items toDoItem) {
   @override
   Widget build(BuildContext context) {
     return Text(

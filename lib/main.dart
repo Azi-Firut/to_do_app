@@ -41,6 +41,18 @@ class HomePage extends StatefulWidget {
 class HomePageState extends State<HomePage> {
   get label => label;
 
+  // void changeIsChecked() {
+  //   if ('isChecked' == false) {
+  //     FirebaseFirestore.instance.collection('todos').add({
+  //       'isChecked': true,
+  //     });
+  //   } else {
+  //     FirebaseFirestore.instance.collection('todos').add({
+  //       'isChecked': false,
+  //     });
+  //   }
+  // }
+
   void addNewLabelToList() {
     setState(() {
       var dateNow = DateTime.now().toString().substring(5, 16);
@@ -63,16 +75,13 @@ class HomePageState extends State<HomePage> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         toolbarHeight: 40,
-        // shape: const RoundedRectangleBorder(
-        //   borderRadius: BorderRadius.only(
-        //       bottomLeft: Radius.circular(15),
-        //       bottomRight: Radius.circular(15)),
-        // ),
         centerTitle: true,
         title: Text(widget.title),
       ),
       body: StreamBuilder(
-        stream: FirebaseFirestore.instance.collection('todos').snapshots(),
+        stream: FirebaseFirestore.instance
+            .collection('todos')
+            .snapshots(includeMetadataChanges: true),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (!snapshot.hasData) {
             return const Center(
@@ -129,6 +138,7 @@ class HomePageState extends State<HomePage> {
                       child: Row(
                         children: [
                           CheckBoxWidget(
+                            targetIndex,
                             targetIndex['isChecked'],
                             targetIndex['imgUrl'],
                           ),
