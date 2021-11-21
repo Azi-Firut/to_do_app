@@ -16,7 +16,7 @@ Start develop new Flutter app , using Firebase.
   
 ## demo:
 
-![screenshot of sample](https://github.com/Zifirut/to_do_app/blob/master/video.gif
+![screenshot of sample](https://github.com/Zifirut/to_do_app/blob/master/video.gif)
 
 // Old //
 
