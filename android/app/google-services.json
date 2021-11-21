@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "450103052113",
+    "project_id": "to-do-app-first-firebase-exp",
+    "storage_bucket": "to-do-app-first-firebase-exp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:450103052113:android:11f10d01c7be01e64c7570",
+        "android_client_info": {
+          "package_name": "com.example.to_do"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "450103052113-u0t06l1icj4fqf35pd95glj5v6fchrrf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBxBNLpkn-UfmZ8tysCkFmrF0JscqMepE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "450103052113-u0t06l1icj4fqf35pd95glj5v6fchrrf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

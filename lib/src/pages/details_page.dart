@@ -1,8 +1,10 @@
-import 'package:custom_check_box/custom_check_box.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:to_do/src/function/functions_main_screen.dart';
-import 'package:to_do/src/widgets/widgets_main_screen.dart';
+
+import '../../main.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,6 +24,7 @@ class MyApp extends StatelessWidget {
       home: const ItemPage(
         title: 'ToDo List',
         label: '',
+        targetIndex: '',
       ),
     );
   }
@@ -29,42 +32,51 @@ class MyApp extends StatelessWidget {
 
 class ItemPage extends StatefulWidget {
   const ItemPage(
-      {Key? key, required this.title, required this.label, this.imgUrl})
+      {Key? key,
+      required this.title,
+      required this.label,
+      this.imgUrl,
+      this.targetIndex})
       : super(key: key);
   final String title;
   final String label;
   final imgUrl;
+  final targetIndex;
 
   @override
   State<ItemPage> createState() => ItemPageState();
 }
 
 class ItemPageState extends State<ItemPage> {
-  // void addNewLabelToList() {
-  //   setState(() {
-  //     //var isChecked;
-  //     var label = inputController.text;
-  //     var dateNow = DateTime.now().toString();
-  //     if (label.isNotEmpty) {
-  //       Items.listItems.insert(0, createNewItem(dateNow, label));
-  //       inputController.clear();
-  //     }
-  //   });
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
           toolbarHeight: 40,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(15),
-                bottomRight: Radius.circular(15)),
-          ),
+          // shape: const RoundedRectangleBorder(
+          //   borderRadius: BorderRadius.only(
+          //       bottomLeft: Radius.circular(15),
+          //       bottomRight: Radius.circular(15)),
+          // ),
           centerTitle: true,
-          title: const Text('Details'),
+          title: Text('Details '),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.delete),
+              onPressed: () {
+                delLabelItem(context, widget.targetIndex);
+                delMessage(widget.label);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => HomePage(
+                              title: '',
+                            )));
+              },
+              tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+            )
+          ],
         ),
         body: Center(
           child: Column(

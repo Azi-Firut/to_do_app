@@ -2,15 +2,20 @@ import 'package:custom_check_box/custom_check_box.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:custom_check_box/custom_check_box.dart';
+import 'package:to_do/src/data/list_items.dart';
 import 'package:to_do/src/function/functions_main_screen.dart';
 
 // Check Box widget
 class CheckBoxWidget extends StatefulWidget {
   CheckBoxWidget(
-    this.isChecked, {
+    this.isChecked,
+    this.imgUrl, {
     Key? key,
   }) : super(key: key);
-  var isChecked;
+  bool isChecked;
+
+  String imgUrl;
+
   @override
   State<StatefulWidget> createState() => _CheckBoxWidgetState();
 }
