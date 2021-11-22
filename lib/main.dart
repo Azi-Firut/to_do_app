@@ -41,18 +41,6 @@ class HomePage extends StatefulWidget {
 class HomePageState extends State<HomePage> {
   get label => label;
 
-  // void changeIsChecked() {
-  //   if ('isChecked' == false) {
-  //     FirebaseFirestore.instance.collection('todos').add({
-  //       'isChecked': true,
-  //     });
-  //   } else {
-  //     FirebaseFirestore.instance.collection('todos').add({
-  //       'isChecked': false,
-  //     });
-  //   }
-  // }
-
   void addNewLabelToList() {
     setState(() {
       var dateNow = DateTime.now().toString().substring(5, 16);

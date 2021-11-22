@@ -53,24 +53,28 @@ class _CheckBoxWidgetState extends State<CheckBoxWidget> {
         checkBoxSize: 18,
         onChanged: (val) {
           setState(() {
+            var indexId = widget.targetIndex.id;
+
             if (widget.isChecked == true) {
               widget.isChecked = false;
-              FirebaseFirestore.instance
-                  .collection('todos')
-                  .doc(widget.targetIndex.id)
-                  .update({
-                'isChecked': false,
-              });
-              //changeIsChecked(widget.targetIndex);
+              var checked = widget.isChecked;
+              // FirebaseFirestore.instance
+              //     .collection('todos')
+              //     .doc(widget.targetIndex.id)
+              //     .update({
+              //   'isChecked': false,
+              // });
+              changeIsChecked(indexId, checked);
             } else {
               widget.isChecked = true;
-              FirebaseFirestore.instance
-                  .collection('todos')
-                  .doc(widget.targetIndex.id)
-                  .update({
-                'isChecked': true,
-              });
-              //changeIsChecked(widget.targetIndex);
+              var checked = widget.isChecked;
+              // FirebaseFirestore.instance
+              //     .collection('todos')
+              //     .doc(widget.targetIndex.id)
+              //     .update({
+              //   'isChecked': true,
+              // });
+              changeIsChecked(indexId, checked);
             }
           });
         },

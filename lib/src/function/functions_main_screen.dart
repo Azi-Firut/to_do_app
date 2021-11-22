@@ -1,7 +1,6 @@
 import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
+//import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -30,17 +29,17 @@ void delLabelItem(context, targetIndex) {
   });
 }
 
-// void changeIsChecked(targetIndex) {
-//   if ('isChecked' == false) {
-//     log(targetIndex.toString());
-//     FirebaseFirestore.instance.collection('todos').doc(targetIndex).update({
-//       'isChecked': false,
-//     });
-//
-//   } else if ('isChecked' == true) {
-//     FirebaseFirestore.instance.collection('todos').doc(targetIndex).update({
-//       'isChecked': true,
-//     });
-//
-//   }
-// }
+void changeIsChecked(indexId, checked) {
+  var path = FirebaseFirestore.instance.collection('todos').doc(indexId);
+  if (checked == false) {
+    log(indexId.toString());
+    path.update({
+      'isChecked': false,
+    });
+  } else {
+    log(indexId.toString());
+    path.update({
+      'isChecked': true,
+    });
+  }
+}
