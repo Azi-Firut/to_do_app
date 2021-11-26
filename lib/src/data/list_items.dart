@@ -1,3 +1,24 @@
+class ItemData {
+  var isChecked;
+  var imgUrl;
+
+  var dateNow;
+
+  var label;
+
+  //var label;
+
+  // var label;
+
+  // ItemData(
+  //   this.label,
+  //   this.imgUrl,
+  //   this.date,
+  //   this.isChecked,
+  // );
+  ItemData({this.isChecked, this.imgUrl, this.label, this.dateNow});
+}
+
 // class Items {
 //   var imgUrl;
 //   String label;

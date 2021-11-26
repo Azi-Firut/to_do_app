@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
@@ -39,11 +40,13 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage> {
-  get label => label;
+  // get label => label;
+
+  //get isChecked => isChecked;
 
   void addNewLabelToList() {
     setState(() {
-      var dateNow = DateTime.now().toString().substring(5, 16);
+      var dateNow = DateTime.now().toString().substring(0, 16);
       if (inputController.text.isNotEmpty) {
         FirebaseFirestore.instance.collection('todos').add({
           'label': inputController.text,
@@ -71,20 +74,36 @@ class HomePageState extends State<HomePage> {
             .collection('todos')
             .snapshots(includeMetadataChanges: true),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          // List<ItemData> items = [];
+//List<Map<ItemData>> items = []
           if (!snapshot.hasData) {
             return const Center(
               child: CircularProgressIndicator.adaptive(),
             );
           }
           if (snapshot.hasData) {
-            snapshot.data!.docs.forEach((QueryDocumentSnapshot query) {
+            for (var query in snapshot.data!.docs) {
               Map<String, dynamic> data = query.data()! as Map<String, dynamic>;
 
-              var label = data['label'];
-              var imgUrl = data['imgUrl'];
-              var dateNow = data['dateNow'];
-              var isChecked = data['isChecked'];
-            });
+              log('DATA ${data.toString()}');
+              log('Snap list of map _JsonQueryDocumentSnapshot == ${snapshot.data!.docs}');
+
+              // data.deepSortByValue();
+              // sortByChecked(data);
+
+              // var label = data['label'];
+              // var imgUrl = data['imgUrl'];
+              // var dateNow = data['dateNow'];
+              // var isChecked = data['isChecked'];
+
+              // items.add(ItemData(
+              //     label: data['label'],
+              //     imgUrl: data['imgUrl'],
+              //     dateNow: data['dateNow'],
+              //     isChecked: data['isChecked']));
+              //
+              // log('ITEMS ${items.toString()}');
+            }
           }
 
           return Center(
@@ -92,6 +111,7 @@ class HomePageState extends State<HomePage> {
                 itemCount: snapshot.data!.docs.length,
                 itemBuilder: (context, index) {
                   var targetIndex = snapshot.data!.docs[index];
+
                   return Slidable(
                     key: const ValueKey(0),
                     endActionPane: ActionPane(
@@ -127,6 +147,7 @@ class HomePageState extends State<HomePage> {
                         children: [
                           CheckBoxWidget(
                             targetIndex,
+                            // items.index['imgUrl'],
                             targetIndex['isChecked'],
                             targetIndex['imgUrl'],
                           ),

@@ -1,3 +1,4 @@
+import 'dart:collection';
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 //import 'package:firebase_core/firebase_core.dart';
@@ -29,6 +30,12 @@ void delLabelItem(context, targetIndex) {
   });
 }
 
+sortByChecked(data) {
+  SplayTreeMap.from(
+      data, (keyTrue, keyFalse) => data[keyTrue].compareTo(data[keyFalse]));
+  return data;
+}
+
 void changeIsChecked(indexId, checked) {
   var path = FirebaseFirestore.instance.collection('todos').doc(indexId);
   if (checked == false) {
@@ -36,10 +43,12 @@ void changeIsChecked(indexId, checked) {
     path.update({
       'isChecked': false,
     });
+    log('isChecked: false');
   } else {
     log(indexId.toString());
     path.update({
       'isChecked': true,
     });
+    log('isChecked: true');
   }
 }

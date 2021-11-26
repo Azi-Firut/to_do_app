@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:to_do/src/function/functions_main_screen.dart';
+import 'package:parallax_bg/parallax_bg.dart';
 
 import '../../main.dart';
 
@@ -82,7 +83,9 @@ class ItemPageState extends State<ItemPage> {
                 decoration: BoxDecoration(
                   color: const Color(0xff7c94b6),
                   image: DecorationImage(
-                    image: NetworkImage(widget.imgUrl), // temporarily not used
+                    image: NetworkImage(widget.imgUrl),
+
+                    // temporarily not used
                     fit: BoxFit.cover,
                   ),
                   borderRadius: const BorderRadius.all(Radius.circular(200.0)),

@@ -22,8 +22,6 @@ class CheckBoxWidget extends StatefulWidget {
 }
 
 class _CheckBoxWidgetState extends State<CheckBoxWidget> {
-  // get targetIndex => targetIndex;
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -54,26 +52,13 @@ class _CheckBoxWidgetState extends State<CheckBoxWidget> {
         onChanged: (val) {
           setState(() {
             var indexId = widget.targetIndex.id;
-
             if (widget.isChecked == true) {
               widget.isChecked = false;
               var checked = widget.isChecked;
-              // FirebaseFirestore.instance
-              //     .collection('todos')
-              //     .doc(widget.targetIndex.id)
-              //     .update({
-              //   'isChecked': false,
-              // });
               changeIsChecked(indexId, checked);
             } else {
               widget.isChecked = true;
               var checked = widget.isChecked;
-              // FirebaseFirestore.instance
-              //     .collection('todos')
-              //     .doc(widget.targetIndex.id)
-              //     .update({
-              //   'isChecked': true,
-              // });
               changeIsChecked(indexId, checked);
             }
           });
@@ -81,18 +66,6 @@ class _CheckBoxWidgetState extends State<CheckBoxWidget> {
       ),
     );
   }
-
-  // void changeIsChecked() {
-  //   if ('isChecked' == false) {
-  //     FirebaseFirestore.instance.collection('todos').add({
-  //       'isChecked': true,
-  //     });
-  //   } else {
-  //     FirebaseFirestore.instance.collection('todos').add({
-  //       'isChecked': false,
-  //     });
-  //   }
-  // }
 }
 
 // Show Label widget
