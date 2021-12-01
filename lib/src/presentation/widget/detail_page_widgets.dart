@@ -1,52 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:to_do/src/function/functions_main_screen.dart';
-import 'package:parallax_bg/parallax_bg.dart';
+import 'package:provider/provider.dart';
+import 'package:to_do/src/domain/repository/todo_repository.dart';
+import 'package:to_do/src/presentation/screens/detail_page.dart';
+import 'package:to_do/src/presentation/screens/home_page.dart';
 
-import '../../main.dart';
-
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'ToDo List',
-      theme: ThemeData(
-        primarySwatch: Colors.deepOrange,
-      ),
-      home: const ItemPage(
-        title: 'ToDo List',
-        label: '',
-        targetIndex: '',
-      ),
-    );
-  }
-}
-
-class ItemPage extends StatefulWidget {
-  const ItemPage(
-      {Key? key,
-      required this.title,
-      required this.label,
-      this.imgUrl,
-      this.targetIndex})
-      : super(key: key);
-  final String title;
-  final String label;
-  final imgUrl;
-  final targetIndex;
-
-  @override
-  State<ItemPage> createState() => ItemPageState();
-}
-
-class ItemPageState extends State<ItemPage> {
+class DetailPageState extends State<DetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,13 +13,17 @@ class ItemPageState extends State<ItemPage> {
         appBar: AppBar(
           toolbarHeight: 40,
           centerTitle: true,
-          title: Text('Details '),
+          title: const Text('Details '),
           actions: [
             IconButton(
               icon: const Icon(Icons.delete),
               onPressed: () {
-                delLabelItem(context, widget.targetIndex);
-                delMessage(widget.label);
+                Provider.of<TodoRepository>(context, listen: false)
+                    .delLabelItem(context, widget.targetIndex);
+
+                Provider.of<TodoRepository>(context, listen: false)
+                    .delMessage(widget.label);
+
                 Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -84,8 +47,6 @@ class ItemPageState extends State<ItemPage> {
                   color: const Color(0xff7c94b6),
                   image: DecorationImage(
                     image: NetworkImage(widget.imgUrl),
-
-                    // temporarily not used
                     fit: BoxFit.cover,
                   ),
                   borderRadius: const BorderRadius.all(Radius.circular(200.0)),

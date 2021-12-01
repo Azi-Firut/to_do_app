@@ -1,22 +1,71 @@
 class ItemData {
-  var isChecked;
-  var imgUrl;
+  final bool isChecked;
+  final String imgUrl;
+  final String dateNow;
+  final String label;
 
-  var dateNow;
+  const ItemData({
+    required this.isChecked,
+    required this.imgUrl,
+    required this.dateNow,
+    required this.label,
+  });
 
-  var label;
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is ItemData &&
+          runtimeType == other.runtimeType &&
+          isChecked == other.isChecked &&
+          imgUrl == other.imgUrl &&
+          dateNow == other.dateNow &&
+          label == other.label);
 
-  //var label;
+  @override
+  int get hashCode =>
+      isChecked.hashCode ^ imgUrl.hashCode ^ dateNow.hashCode ^ label.hashCode;
 
-  // var label;
+  @override
+  String toString() {
+    return 'ItemData{' +
+        ' isChecked: $isChecked,' +
+        ' imgUrl: $imgUrl,' +
+        ' dateNow: $dateNow,' +
+        ' label: $label,' +
+        '}';
+  }
 
-  // ItemData(
-  //   this.label,
-  //   this.imgUrl,
-  //   this.date,
-  //   this.isChecked,
-  // );
-  ItemData({this.isChecked, this.imgUrl, this.label, this.dateNow});
+  ItemData copyWith({
+    bool? isChecked,
+    String? imgUrl,
+    String? dateNow,
+    String? label,
+  }) {
+    return ItemData(
+      isChecked: isChecked ?? this.isChecked,
+      imgUrl: imgUrl ?? this.imgUrl,
+      dateNow: dateNow ?? this.dateNow,
+      label: label ?? this.label,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'isChecked': this.isChecked,
+      'imgUrl': this.imgUrl,
+      'dateNow': this.dateNow,
+      'label': this.label,
+    };
+  }
+
+  factory ItemData.fromMap(Map<String, dynamic> map) {
+    return ItemData(
+      isChecked: map['isChecked'] as bool,
+      imgUrl: map['imgUrl'] as String,
+      dateNow: map['dateNow'] as String,
+      label: map['label'] as String,
+    );
+  }
 }
 
 // class Items {
