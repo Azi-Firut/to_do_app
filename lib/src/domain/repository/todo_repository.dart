@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:to_do/src/data/store/firebase_store.dart';
 
 class TodoRepository extends ChangeNotifier {
@@ -39,5 +40,10 @@ class TodoRepository extends ChangeNotifier {
   void inputNewImgUrlDialog(context, targetIndex, imgUrl) {
     log('repository new img $imgUrl');
     firebaseStore.inputNewImgUrlDialog(context, targetIndex, imgUrl);
+  }
+
+  void callZoomSmallAvatar(context, imgUrl, targetIndex) {
+    log('Zoom');
+    firebaseStore.callZoomSmallAvatar(context, imgUrl, targetIndex);
   }
 }

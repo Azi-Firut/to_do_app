@@ -72,7 +72,6 @@ class BigImageState extends State<BigImage> {
     // log('detail page widgets in  ${widget.label}');
     return Container(
       child: GestureDetector(onTap: () {
-        // inputNewImgUrlDialog(context, widget.targetIndex, widget.imgUrl);
         Provider.of<TodoRepository>(context, listen: false)
             .inputNewImgUrlDialog(context, widget.targetIndex, widget.imgUrl);
       }),
@@ -87,7 +86,7 @@ class BigImageState extends State<BigImage> {
           ),
           fit: BoxFit.cover,
         ),
-        borderRadius: const BorderRadius.all(Radius.circular(200.0)),
+        borderRadius: const BorderRadius.all(Radius.circular(300.0)),
         border: Border.all(
           color: Colors.white,
           width: 4.0,

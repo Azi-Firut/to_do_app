@@ -102,13 +102,14 @@ class HomePageState extends State<HomePage> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => DetailPage(
-                                              targetIndex: targetIndex,
-                                              id: widget.id,
-                                              title: widget.title,
-                                              label: targetIndex['label'],
-                                              imgUrl: targetIndex['imgUrl'],
-                                            )));
+                                      builder: (context) => DetailPage(
+                                        targetIndex: targetIndex,
+                                        id: widget.id,
+                                        title: widget.title,
+                                        label: targetIndex['label'],
+                                        imgUrl: targetIndex['imgUrl'],
+                                      ),
+                                    ));
                               },
                               child: Stack(children: [
                                 ShowLabelWidget(targetIndex['label']),

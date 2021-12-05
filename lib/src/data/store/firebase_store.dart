@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:to_do/src/domain/repository/todo_repository.dart';
 import 'package:to_do/src/presentation/screens/add_task_page.dart';
 import 'package:to_do/src/presentation/widget/detail_page_widgets.dart';
+import 'package:to_do/src/presentation/widget/home_page_widgets.dart';
 
 class FirebaseStore {
   var _firestore = FirebaseFirestore.instance;
@@ -126,6 +127,21 @@ class FirebaseStore {
               ],
             ),
           ],
+        );
+      },
+    );
+  }
+
+  //Zooom
+  callZoomSmallAvatar(context, imgUrl, targetIndex) {
+    return showDialog(
+      context: context,
+      barrierDismissible:
+          true, // dialog is dismissible with a tap on the barrier
+      builder: (BuildContext context) {
+        return Center(
+          child: SizedBox(
+              width: 400, height: 450, child: BigImage(imgUrl, targetIndex)),
         );
       },
     );

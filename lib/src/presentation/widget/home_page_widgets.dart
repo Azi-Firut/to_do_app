@@ -87,7 +87,8 @@ class SmallImageWidget extends StatelessWidget {
       child: GestureDetector(onTap: () {
         // inputNewImgUrlDialog(context, targetIndex, imgUrl);
         Provider.of<TodoRepository>(context, listen: false)
-            .inputNewImgUrlDialog(context, targetIndex, imgUrl);
+            .callZoomSmallAvatar(context, imgUrl, targetIndex);
+        Container();
       }),
       margin: const EdgeInsets.only(top: 8, bottom: 8),
       width: 60.0,
