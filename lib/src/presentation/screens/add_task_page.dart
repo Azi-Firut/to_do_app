@@ -11,15 +11,16 @@ showBottomDocketScreen(BuildContext context) {
         borderRadius: BorderRadius.only(
             topLeft: Radius.circular(15), topRight: Radius.circular(15)),
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.deepOrange,
       context: context,
       builder: (context) {
         return Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const ShowTexUnderField(),
               const AddTextField(''),
+              const Spacer(),
               AddTaskButton(inputController),
             ]);
       });

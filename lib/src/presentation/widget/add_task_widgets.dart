@@ -13,9 +13,9 @@ class ShowTexUnderField extends StatelessWidget {
       child: Text(
         'add new item',
         style: TextStyle(
-          color: Colors.black38,
-          fontSize: 20,
-          fontWeight: FontWeight.bold,
+          color: Colors.white,
+          fontSize: 16,
+          // fontWeight: FontWeight.bold,
         ),
       ),
     );
@@ -33,8 +33,10 @@ class InputTextField extends StatelessWidget {
         controller: controller,
         textAlign: TextAlign.center,
         decoration: InputDecoration(
+          focusColor: Colors.white,
+          fillColor: Colors.black12,
           focusedBorder: OutlineInputBorder(
-              borderSide: const BorderSide(width: 3),
+              borderSide: const BorderSide(width: 1),
               borderRadius: BorderRadius.circular(30)),
           hintText: 'type here',
           filled: true,
@@ -63,13 +65,14 @@ class AddTaskButton extends StatelessWidget {
         width: 100.0,
         padding: const EdgeInsets.all(8.0),
         child: FloatingActionButton(
+          elevation: 10,
           onPressed: () {
             Provider.of<TodoRepository>(context, listen: false)
                 .addNewLabelToList();
           },
           child: const Icon(
             Icons.add,
-            size: 30,
+            size: 50,
           ),
         ),
       ),

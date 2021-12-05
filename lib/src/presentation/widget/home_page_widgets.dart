@@ -5,6 +5,8 @@ import 'package:provider/provider.dart';
 import 'package:to_do/src/domain/repository/todo_repository.dart';
 import 'package:to_do/src/presentation/screens/add_task_page.dart';
 
+import 'detail_page_widgets.dart';
+
 // Check Box widget
 class CheckBoxWidget extends StatefulWidget {
   CheckBoxWidget(
@@ -73,13 +75,20 @@ class _CheckBoxWidgetState extends State<CheckBoxWidget> {
 // Small Avatar
 class SmallImageWidget extends StatelessWidget {
   SmallImageWidget(
-    this.imgUrl, {
+    this.imgUrl,
+    this.targetIndex, {
     Key? key,
   }) : super(key: key);
   var imgUrl;
+  var targetIndex;
   @override
   Widget build(BuildContext context) {
     return Container(
+      child: GestureDetector(onTap: () {
+        // inputNewImgUrlDialog(context, targetIndex, imgUrl);
+        Provider.of<TodoRepository>(context, listen: false)
+            .inputNewImgUrlDialog(context, targetIndex, imgUrl);
+      }),
       margin: const EdgeInsets.only(top: 8, bottom: 8),
       width: 60.0,
       height: 60.0,
@@ -115,12 +124,13 @@ class ShowLabelWidget extends StatelessWidget {
     return SizedBox(
       height: 76.0,
       child: Padding(
-        padding:
-            const EdgeInsets.only(left: 8.0, top: 8.0, bottom: 8.0, right: 8.0),
+        padding: const EdgeInsets.only(
+            left: 8.0, top: 16.0, bottom: 10.0, right: 8.0),
         //GestureDetector!!
         child: Text(
           // GestureDetector
           label,
+          maxLines: 2,
           textAlign: TextAlign.right,
           style: const TextStyle(
             fontWeight: FontWeight.w300,

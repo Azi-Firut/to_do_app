@@ -32,10 +32,12 @@ class DetailPage extends StatefulWidget {
       required this.title,
       required this.label,
       this.imgUrl,
-      this.targetIndex})
+      this.targetIndex,
+      this.id})
       : super(key: key);
   final String title;
   final String label;
+  final id;
   final imgUrl;
   final targetIndex;
 

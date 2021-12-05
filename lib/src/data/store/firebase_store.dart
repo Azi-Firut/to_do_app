@@ -2,7 +2,10 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:provider/provider.dart';
+import 'package:to_do/src/domain/repository/todo_repository.dart';
 import 'package:to_do/src/presentation/screens/add_task_page.dart';
+import 'package:to_do/src/presentation/widget/detail_page_widgets.dart';
 
 class FirebaseStore {
   var _firestore = FirebaseFirestore.instance;
@@ -23,9 +26,16 @@ class FirebaseStore {
     }
   }
 
-  // void updateTodo(String id, bool isChecked) {
-  //   _firestore.collection('todos').doc(id).update({"isChecked": isChecked});
-  // }
+  void updateTodoLabel(String targetIndex, newLabel) {
+    log('target label  $targetIndex');
+    _firestore.collection('todos').doc(targetIndex).update({'label': newLabel});
+  }
+
+  void updateTodoImg(targetIndex, String imgUrl) {
+    log('target id   $targetIndex');
+    log('target img   $imgUrl');
+    _firestore.collection('todos').doc(targetIndex).update({'imgUrl': imgUrl});
+  }
 
   void delMessage(label) {
     Fluttertoast.showToast(
@@ -40,7 +50,7 @@ class FirebaseStore {
 
   void delLabelItem(context, targetIndex) {
     _firestore.collection('todos').doc(targetIndex.id).delete().then((_) {
-      print("Delete successful!");
+      log("Delete successful!");
     });
   }
 
@@ -61,5 +71,63 @@ class FirebaseStore {
         'isChecked': isChecked, //true
       });
     }
+  }
+
+  inputNewImgUrlDialog(BuildContext context, targetIndex, imgUrl) {
+    return showDialog(
+      context: context,
+      barrierDismissible:
+          true, // dialog is dismissible with a tap on the barrier
+      builder: (BuildContext context) {
+        TextEditingController inputNewUrl = TextEditingController();
+        log(inputNewUrl.toString());
+        return AlertDialog(
+          title: const Text(
+            'Image change',
+            textAlign: TextAlign.center,
+          ),
+          content: Row(
+            children: <Widget>[
+              Expanded(
+                  child: TextField(
+                controller: inputNewUrl,
+                autofocus: true,
+                decoration: InputDecoration(
+                    labelText: 'Paste url of new image', hintText: '$imgUrl'),
+              ))
+            ],
+          ),
+          actions: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextButton(
+                  child: const Text('CANCEL'),
+                  onPressed: () {
+                    inputNewUrl.clear();
+                    Navigator.of(context).pop();
+                  },
+                ),
+                const Spacer(),
+                TextButton(
+                  child: const Text('ACCEPT'),
+                  onPressed: () {
+                    if (inputNewUrl.text == '') {
+                      inputNewUrl.text = imgUrl;
+                      log('Empty value, use this img');
+                    } else {
+                      Provider.of<TodoRepository>(context, listen: false)
+                          .updateTodoImg(targetIndex.id, inputNewUrl.text);
+                    }
+                    inputNewUrl.clear();
+                    Navigator.of(context).pop();
+                  },
+                )
+              ],
+            ),
+          ],
+        );
+      },
+    );
   }
 }

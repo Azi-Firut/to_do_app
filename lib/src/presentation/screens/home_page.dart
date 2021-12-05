@@ -1,6 +1,6 @@
-import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
 import 'package:to_do/src/domain/repository/todo_repository.dart';
@@ -10,19 +10,20 @@ import 'detail_page.dart';
 class HomePage extends StatefulWidget {
   const HomePage({Key? key, required this.title}) : super(key: key);
   final String title;
+  get id => null;
 
   @override
   State<HomePage> createState() => HomePageState();
 }
 
 class HomePageState extends State<HomePage> {
-  // addNewLabelToList()
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        systemOverlayStyle:
+            const SystemUiOverlayStyle(statusBarColor: Colors.deepOrange),
         toolbarHeight: 40,
         centerTitle: true,
         title: Text(widget.title),
@@ -41,8 +42,8 @@ class HomePageState extends State<HomePage> {
             for (var query in snapshot.data!.docs) {
               Map<String, dynamic> data = query.data()! as Map<String, dynamic>;
 
-              log('DATA ${data.toString()}');
-              log('Snap list of map _JsonQueryDocumentSnapshot == ${snapshot.data!.docs}');
+              // log('DATA ${data.toString()}');
+              // log('Snap list of map _JsonQueryDocumentSnapshot == ${snapshot.data!.docs}');
             }
           }
 
@@ -51,6 +52,8 @@ class HomePageState extends State<HomePage> {
                 itemCount: snapshot.data!.docs.length,
                 itemBuilder: (context, index) {
                   var targetIndex = snapshot.data!.docs[index];
+                  var id =
+                      FirebaseFirestore.instance.collection('todos').doc('id');
 
                   return Slidable(
                     key: const ValueKey(0),
@@ -91,7 +94,7 @@ class HomePageState extends State<HomePage> {
                             targetIndex['isChecked'],
                             targetIndex['imgUrl'],
                           ),
-                          SmallImageWidget(targetIndex['imgUrl']),
+                          SmallImageWidget(targetIndex['imgUrl'], targetIndex),
                           Expanded(
                             flex: 1,
                             child: GestureDetector(
@@ -101,6 +104,7 @@ class HomePageState extends State<HomePage> {
                                     MaterialPageRoute(
                                         builder: (context) => DetailPage(
                                               targetIndex: targetIndex,
+                                              id: widget.id,
                                               title: widget.title,
                                               label: targetIndex['label'],
                                               imgUrl: targetIndex['imgUrl'],
@@ -110,7 +114,7 @@ class HomePageState extends State<HomePage> {
                                 ShowLabelWidget(targetIndex['label']),
                                 Positioned(
                                   child: ShowItemDate(targetIndex['dateNow']),
-                                  bottom: 4,
+                                  bottom: 0,
                                   right: 4,
                                 ),
                                 Positioned(
