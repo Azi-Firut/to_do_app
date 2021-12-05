@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 import 'package:to_do/src/domain/repository/todo_repository.dart';
 import 'package:to_do/src/presentation/screens/add_task_page.dart';
 import 'package:to_do/src/presentation/widget/detail_page_widgets.dart';
-import 'package:to_do/src/presentation/widget/home_page_widgets.dart';
 
 class FirebaseStore {
   var _firestore = FirebaseFirestore.instance;
