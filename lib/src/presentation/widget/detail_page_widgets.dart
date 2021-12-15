@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:to_do/src/domain/repository/todo_repository.dart';
+import 'package:to_do/src/presentation/screens/add_task_page.dart';
 import 'package:to_do/src/presentation/screens/detail_page.dart';
 import 'package:to_do/src/presentation/screens/home_page.dart';
 
@@ -65,11 +66,10 @@ class BigImage extends StatefulWidget {
 }
 
 class BigImageState extends State<BigImage> {
+  String get imgUrl => inputController.text;
+
   @override
   Widget build(BuildContext context) {
-    // TextEditingController inputNewlabel =
-    //     TextEditingController(text: widget.imgUrl);
-    // log('detail page widgets in  ${widget.label}');
     return Container(
       child: GestureDetector(onTap: () {
         Provider.of<TodoRepository>(context, listen: false)
@@ -137,8 +137,6 @@ class ModifyLabelFieldState extends State<ModifyLabelField> {
               ],
             ),
             onEditingComplete: () {
-              // log('detail page widgets out  ${widget.label}');
-              // log('detail page widgets out  ${widget.targetIndex.id}');
               Provider.of<TodoRepository>(context, listen: false)
                   .updateTodoLabel(widget.targetIndex.id, inputNewlabel.text);
               setState(() {

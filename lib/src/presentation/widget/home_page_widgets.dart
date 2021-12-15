@@ -5,8 +5,6 @@ import 'package:provider/provider.dart';
 import 'package:to_do/src/domain/repository/todo_repository.dart';
 import 'package:to_do/src/presentation/screens/add_task_page.dart';
 
-import 'detail_page_widgets.dart';
-
 // Check Box widget
 class CheckBoxWidget extends StatefulWidget {
   CheckBoxWidget(

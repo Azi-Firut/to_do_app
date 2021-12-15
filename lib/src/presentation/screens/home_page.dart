@@ -78,11 +78,11 @@ class HomePageState extends State<HomePage> {
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
                           colors: [
-                            Colors.black.withOpacity(0.4),
-                            Colors.indigo.withOpacity(0.1),
+                            Colors.black.withOpacity(0.01),
+                            Colors.indigo.withOpacity(0.05),
                             Colors.transparent,
                           ],
-                          stops: const [0, 0.01, 0.5],
+                          stops: const [0, 0.0, 0.5],
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,
                         ),
