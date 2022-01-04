@@ -1,6 +1,6 @@
 ## to_do_app
 
-Start develop new Flutter app , using Firebase.
+Start develop new Flutter app , using Firebase, Clean architecture, Provider.
 
 ## used libraries:
 
