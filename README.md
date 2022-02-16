@@ -16,7 +16,7 @@ Start develop new Flutter app , using Firebase, Clean architecture, Provider.
   
 ## demo:
 
-![screenshot of sample](https://github.com/Zifirut/to_do_app/blob/master/video_3.gif)
+![screenshot of sample](https://github.com/Zifirut/to_do_app/blob/master/todo.gif)
 
 // Old //
 
